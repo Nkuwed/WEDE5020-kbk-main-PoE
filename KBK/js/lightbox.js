@@ -1,19 +1,6 @@
 /* ==========================================================================
    lightbox.js — gallery lightbox for art_work.html
    --------------------------------------------------------------------------
-   * Every gallery photo is a <button data-lightbox-item> wrapping the <img>.
-     The button's data-full attribute points at the full-size file and
-     data-caption holds the description.
-   * Clicking a photo opens a full-screen overlay showing the large image.
-   * The overlay stage is SCROLLABLE: the photo opens "fit to screen" and a
-     click / tap (or the zoom button) switches it to full size, which the
-     visitor can scroll around in both directions.
-   * Previous / Next buttons, the arrow keys and a left/right swipe move
-     through the photos; Escape or the × button closes the overlay.
-   * Opening art_work.html#art-N (from the site search) opens photo N.
-   * Focus is moved into the overlay when it opens, kept inside while it is
-     open (Tab trap), and returned to the photo that opened it when it closes.
-   ========================================================================== */
 
 (function () {
   'use strict';
