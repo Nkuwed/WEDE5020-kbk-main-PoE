@@ -64,7 +64,17 @@ Fixing layout of pages and navigations tabs.
 Adding images to art.html
 Fixing enquiry form and contact form, to tell the customers when they when missed a block to fill it in. 
 Worked page by page to redo the code so the JavaScript is working throughout all pages. 
-  
+
+  ### Part 3 - 23 October 2026
+Add serach bar to all Webpages> Site-wide search bar 
+Added a magnifier button to the header of all six pages 
+
+Redid the drawers for mobile after finding a fault
+Added a page viewer/lightbox for "Art Work" for the image to be able to open and they all have short descriptions+ added a Previous and Next button to move/nav images 
+
+
+
+  Part 3 
 
 **Reference List** 
 
