@@ -58,7 +58,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  
+  /* ====================================================================
+     SERVICES: live text search (combines with the category chips above)
+     ==================================================================== */
+  const serviceSearch = document.querySelector('[data-service-search]');
+  if (serviceSearch && serviceGrid) {
+    const cards = serviceGrid.querySelectorAll('.service-card');
+    const applyServiceSearch = () => {
+      const q = serviceSearch.value.trim().toLowerCase();
+      let shown = 0;
+      cards.forEach((card) => {
+        // chip filter hides cards with data-hidden-by-chip; text search hides with data-hidden-by-text
+        const match = q === '' || card.textContent.toLowerCase().includes(q);
+        card.toggleAttribute('data-hidden-by-text', !match);
+        card.style.display = (match && !card.hasAttribute('data-hidden-by-chip')) ? '' : 'none';
+        if (card.style.display !== 'none') shown += 1;
+      });
+      if (emptyState) emptyState.classList.toggle('is-visible', shown === 0);
+    };
+    serviceSearch.addEventListener('input', applyServiceSearch);
+    // let the chip filter know about the text filter
+    filterRow?.addEventListener('click', () => setTimeout(applyServiceSearch, 0));
+  }
+
+  /* ====================================================================
+     FORMS (enquiry.html + contact.html)
+     --------------------------------------------------------------------
+     1. Client-side validation — every field is checked before submit and
+        an error message is shown under any field that is wrong. Fields are
+        re-checked as the visitor fixes them.
+     2. Rules are chosen per field with data-rule="..." in the HTML.
+     3. Submit is handled with fetch() (AJAX), so the page never reloads.
+        - enquiry: the answer (estimate, deposit, availability) is worked
+          out from the chosen service and date and shown on the page.
+        - contact: the details are compiled into an email addressed to
+          CONTACT_EMAIL, which the visitor sends from their email app.
+     ==================================================================== */
+
+  // The studio's email address. Change it here and both the contact form
+  // and the "email instead" link pick it up.
+  const CONTACT_EMAIL = 'keora@example.com';
   
   
   44
