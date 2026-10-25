@@ -8,6 +8,7 @@
   const items = Array.from(document.querySelectorAll('[data-lightbox-item]'));
   if (items.length === 0) return;               // not the Art Work page
 
+
   /* ---- 1. Build the overlay once and add it to the page --------------- */
   const box = document.createElement('div');
   box.className = 'lightbox';
