@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art Work Gallery — KreatedByKeora</title>
     <meta name="description" content="A gallery of nail art designs created by KreatedByKeora, a nail artistry studio in Kibler Park, Johannesburg South.">
+<meta name="keywords" content="nail art gallery, manicure designs, pedicure designs, stiletto nails, chrome nails, French tips, Gel-X nail art, KreatedByKeora portfolio">
+<meta name="author" content="Nonkululeko Sibiya">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,11 +31,30 @@
       <a href="contact.html">Contact</a>
       <a href="art_work.html" class="active"> Art Work</a>
     </nav>
-    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-open>
+    <div class="header-actions">
+      <button class="search-toggle" type="button" aria-label="Search the website" aria-expanded="false" aria-controls="search-panel" data-search-open>
+        <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-open>
       <svg  width="30px" height="30px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
+    </div>
   </div>
 </header>
+
+<!-- ============ SITE SEARCH PANEL (opened by the magnifier in the header; logic in js/search.js) ============ -->
+<div class="search-panel" id="search-panel" data-search-panel hidden>
+  <div class="wrap">
+    <form class="search-form" role="search" data-search-form novalidate>
+      <label class="sr-only" for="site-search">Search the KreatedByKeora website</label>
+      <input type="search" id="site-search" name="q" placeholder="Search services, prices, art work…" autocomplete="off" data-search-input>
+      <button type="button" class="search-close" aria-label="Close search" data-search-close>&times;</button>
+    </form>
+    <p class="search-status" role="status" aria-live="polite" data-search-status>Search services, prices, policies, art work and more.</p>
+    <ul class="search-results" data-search-results></ul>
+  </div>
+</div>
+
 
 <div class="drawer" data-drawer>
   <div class="drawer-panel">
@@ -54,44 +77,124 @@
       <span class="eyebrow">Gallery</span>
       <h1>Art Work</h1>
       <div class="swipe"></div>
-      <p>A showcase of nail designs, colours and styles created in the studio — a taste of what's possible for your next set.</p>
+      <p>A showcase of nail designs, colours and styles created in the studio — a taste of what's possible for your next set. Tap any photo to view it larger.</p>
     </section>
 
-    <h2>Manicures</h2>
-    <section>
+    <!-- Each photo is a <button> so keyboard users can open it too. Clicking opens
+         the lightbox (js/lightbox.js): a large, scrollable, zoomable view with
+         previous/next. data-full = the full-size file, src/srcset = small thumbnails
+         so the grid loads quickly. -->
+    <section id="manicures" aria-labelledby="manicures-title">
+      <h2 id="manicures-title" class="gallery-heading">Manicures</h2>
       <div class="gallery-grid">
-        <div class="thumb"><img src="images/portfolio/blue.jpg" alt="Blue nails"></div>
-        <div class="thumb"><img src="images/portfolio/boh.jpg" alt="Bohemian nails"></div>
-        <div class="thumb"><img src="images/portfolio/sliv.jpg" alt="Golden glitter nails"></div>
-        <div class="thumb"><img src="images/portfolio/gld.jpg" alt="Gold nails"></div>
-        <div class="thumb"><img src="images/portfolio/gnp.jpg" alt="Gel nail polish"></div>
-        <div class="thumb"><img src="images/portfolio/huh.jpg" alt="Nail art design"></div>
-        <div class="thumb"><img src="images/portfolio/gold-jewel-nails.jpeg" alt="Gold jewel nails"></div>
-        <div class="thumb"><img src="images/portfolio/pink-french-charms.jpeg" alt="Pink French charms"></div>
-        <div class="thumb"><img src="images/portfolio/pink.jpg" alt="Pink nail set"></div>
-        <div class="thumb"><img src="images/portfolio/pln1.jpg" alt="Nail art design"></div>
-        <div class="thumb"><img src="images/portfolio/sli3.jpg" alt="Silver nail art"></div>
-        <div class="thumb"><img src="images/portfolio/rng.jpg" alt="Nail art design"></div> 
-        <div class="thumb"><img src="images/portfolio/mix 3.jpg"alt="Slight mix of colours"></div>
-        <div class="thumb"><img src="images/portfolio/Oof.jpg" alt="Slight mix of colours"></div>    
-        <div class="thumb"><img src="images/portfolio/simple mix 1.jpg" alt="Slight mix of colours"></div>    
-        <div class="thumb"><img src="images/portfolio/classic manny.jpg" alt="Slight mix of colours"></div>  
-       
+        <div class="thumb" id="art-1">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/blue-chrome-almond-nails.jpg" data-caption="Blue chrome almond nails">
+            <img src="images/portfolio/thumbs/blue-chrome-almond-nails-480.jpg" srcset="images/portfolio/thumbs/blue-chrome-almond-nails-480.jpg 480w, images/portfolio/thumbs/blue-chrome-almond-nails-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="638" alt="Almond nails in blue chrome with silver French tips" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-2">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/black-bow-charm-nails.jpg" data-caption="Black bow charm nails">
+            <img src="images/portfolio/thumbs/black-bow-charm-nails-480.jpg" srcset="images/portfolio/thumbs/black-bow-charm-nails-480.jpg 480w, images/portfolio/thumbs/black-bow-charm-nails-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="566" alt="Pink stiletto nails decorated with black bow charms" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-3">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/green-gold-chrome-stilettos.jpg" data-caption="Green and gold chrome stilettos">
+            <img src="images/portfolio/thumbs/green-gold-chrome-stilettos-480.jpg" srcset="images/portfolio/thumbs/green-gold-chrome-stilettos-480.jpg 480w, images/portfolio/thumbs/green-gold-chrome-stilettos-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="640" alt="Stiletto nails in green and gold chrome worn with gold rings" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-4">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/gold-jewelled-stilettos.jpg" data-caption="Gold jewelled stilettos">
+            <img src="images/portfolio/thumbs/gold-jewelled-stilettos-480.jpg" srcset="images/portfolio/thumbs/gold-jewelled-stilettos-480.jpg 480w, images/portfolio/thumbs/gold-jewelled-stilettos-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="640" alt="Stiletto nails in gold chrome with crystals and gems" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-5">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/pink-french-gold-charms-stilettos.jpg" data-caption="Pink French with gold charms">
+            <img src="images/portfolio/thumbs/pink-french-gold-charms-stilettos-480.jpg" srcset="images/portfolio/thumbs/pink-french-gold-charms-stilettos-480.jpg 480w, images/portfolio/thumbs/pink-french-gold-charms-stilettos-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="491" alt="Pink French stiletto nails with gold charms and crystals" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-6">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/red-grid-i-love-me-nails.jpg" data-caption="Red grid and “I love me” nails">
+            <img src="images/portfolio/thumbs/red-grid-i-love-me-nails-480.jpg" srcset="images/portfolio/thumbs/red-grid-i-love-me-nails-480.jpg 480w, images/portfolio/thumbs/red-grid-i-love-me-nails-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="544" alt="Long coffin nails with a red grid design and an I love me heart accent" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-7">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/gold-jewel-nails.jpeg" data-caption="Gold jewel nails">
+            <img src="images/portfolio/gold-jewel-nails.jpeg" width="328" height="437" alt="Gold filigree stiletto nails with red gems" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-8">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/pink-french-charms.jpeg" data-caption="Pink French charm set">
+            <img src="images/portfolio/pink-french-charms.jpeg" width="419" height="429" alt="Pink French stiletto nails with gold charm accents" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-9">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/soft-pink-silver-line-nails.jpg" data-caption="Soft pink with silver lines">
+            <img src="images/portfolio/thumbs/soft-pink-silver-line-nails-480.jpg" srcset="images/portfolio/thumbs/soft-pink-silver-line-nails-480.jpg 480w, images/portfolio/thumbs/soft-pink-silver-line-nails-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="638" alt="Sheer pink almond nails with fine silver line art" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-10">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/olive-gold-chrome-almond-nails.jpg" data-caption="Olive chrome almond nails">
+            <img src="images/portfolio/thumbs/olive-gold-chrome-almond-nails-480.jpg" srcset="images/portfolio/thumbs/olive-gold-chrome-almond-nails-480.jpg 480w, images/portfolio/thumbs/olive-gold-chrome-almond-nails-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="519" alt="Almond nails in olive and gold chrome worn with gold rings" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-11">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/lime-teal-gem-stilettos.jpg" data-caption="Lime and teal gem stilettos">
+            <img src="images/portfolio/thumbs/lime-teal-gem-stilettos-480.jpg" srcset="images/portfolio/thumbs/lime-teal-gem-stilettos-480.jpg 480w, images/portfolio/thumbs/lime-teal-gem-stilettos-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="640" alt="Stiletto nails in lime green chrome with teal gems" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-12">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/burgundy-french-stilettos.jpg" data-caption="Burgundy French stilettos">
+            <img src="images/portfolio/thumbs/burgundy-french-stilettos-480.jpg" srcset="images/portfolio/thumbs/burgundy-french-stilettos-480.jpg 480w, images/portfolio/thumbs/burgundy-french-stilettos-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="640" alt="Burgundy French stiletto nails with silver bar detail" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-13">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/black-french-mix-nails.jpg" data-caption="Black French mix">
+            <img src="images/portfolio/thumbs/black-french-mix-nails-480.jpg" srcset="images/portfolio/thumbs/black-french-mix-nails-480.jpg 480w, images/portfolio/thumbs/black-french-mix-nails-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="640" alt="Nude nails with black French tips and small charms" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-14">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/black-white-pattern-nails.jpg" data-caption="Black and white pattern nails">
+            <img src="images/portfolio/thumbs/black-white-pattern-nails-480.jpg" srcset="images/portfolio/thumbs/black-white-pattern-nails-480.jpg 480w, images/portfolio/thumbs/black-white-pattern-nails-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="640" alt="Nude stiletto nails with a black and white pattern" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-15">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/red-pink-ombre-nails.jpg" data-caption="Red ombré nails">
+            <img src="images/portfolio/thumbs/red-pink-ombre-nails-480.jpg" srcset="images/portfolio/thumbs/red-pink-ombre-nails-480.jpg 480w, images/portfolio/thumbs/red-pink-ombre-nails-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="640" alt="Short nails with a red and pink ombré finish" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-16">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/classic-white-manicure.jpg" data-caption="Classic white manicure">
+            <img src="images/portfolio/thumbs/classic-white-manicure-480.jpg" srcset="images/portfolio/thumbs/classic-white-manicure-480.jpg 480w, images/portfolio/thumbs/classic-white-manicure-960.jpg 960w" sizes="(min-width: 860px) 25vw, (min-width: 600px) 33vw, 50vw" width="480" height="640" alt="Short natural nails with a clean milky white manicure" loading="lazy">
+          </button>
+        </div>
       </div>
     </section>
-<h2> Pedicures </h2>
-<section>
+
+    <section id="pedicures" aria-labelledby="pedicures-title">
+      <h2 id="pedicures-title" class="gallery-heading">Pedicures</h2>
       <div class="gallery-grid">
-        <div class="thumb"><img src="images/portfolio/T2.png" alt="Nail art design"></div>
-        <div class="thumb"><img src="images/portfolio/T1.png" alt="Nail art design"></div>
-        <div class="thumb"><img src="images/portfolio/T3.png" alt="Nail art design"></div>
-        <div class="thumb"><img src="images/portfolio/T4.png" alt="Nail art design"></div>
-
-</div>
-</section>
-
-
-
+        <div class="thumb" id="art-17">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/french-pedicure-pink-gloves.png" data-caption="French pedicure — pink gloves">
+            <img src="images/portfolio/french-pedicure-pink-gloves.png" width="471" height="535" alt="French pedicure with white tips, photographed with pink gloves" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-18">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/french-pedicure-close-up.png" data-caption="French pedicure — close-up">
+            <img src="images/portfolio/french-pedicure-close-up.png" width="462" height="410" alt="Close-up of a French pedicure with crisp white tips" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-19">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/french-pedicure-black-sandals.png" data-caption="French pedicure — sandals">
+            <img src="images/portfolio/french-pedicure-black-sandals.png" width="465" height="458" alt="French pedicure with white tips in black sandals" loading="lazy">
+          </button>
+        </div>
+        <div class="thumb" id="art-20">
+          <button type="button" class="thumb-open" data-lightbox-item data-full="images/portfolio/french-pedicure-flower-sandals.png" data-caption="French pedicure — flower sandals">
+            <img src="images/portfolio/french-pedicure-flower-sandals.png" width="463" height="450" alt="French pedicure with white tips and floral flip-flops" loading="lazy">
+          </button>
+        </div>
+      </div>
+    </section>
 
     <section>
       <p class="gallery-note">More designs and styles are available on KreatedByKeora's social media platforms.</p>
@@ -107,8 +210,8 @@
     <div class="brand"><img src="images/hero/logo.jpeg" alt=""> KreatedByKeora</div>
     <p>Nail artistry studio based in Kibler Park, Johannesburg South. Bookings via website form or WhatsApp.</p>
     <div class="social-row">
-      <a class="social-btn whatsapp" href="https://wa.me/0820951275" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="social-btn" href="tel:0820951275">Call</a>
+      <a class="social-btn whatsapp" href="https://wa.me/27820951275" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="social-btn" href="tel:+27820951275">Call</a>
     </div>
     <div class="footer-links">
       <a href="https://instagram.com/kreatedbykeora" target="_blank" rel="noopener">Instagram</a>
@@ -120,5 +223,7 @@
 </footer>
 
 <script src="js/main.js" defer></script>
+<script src="js/lightbox.js" defer></script>
+<script src="js/search.js" defer></script>
 </body>
 </html>
