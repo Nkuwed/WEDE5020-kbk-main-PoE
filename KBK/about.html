@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Keora — KreatedByKeora</title>
 <meta name="description" content="Meet Keora — qualified nail technician and founder of KreatedByKeora, a nail artistry studio in Kibler Park, Johannesburg South.">
+<meta name="keywords" content="Keora nail technician, KreatedByKeora story, nail artist Kibler Park, nail studio Johannesburg South, studio mission and vision">
+<meta name="author" content="Nonkululeko Sibiya">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index, follow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,17 +27,36 @@
     <nav class="top-links" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
-      <a href="about.html" class= "active">About</a>
+      <a href="about.html" class= "active">About us</a>
       <a href="enquiry.html">Enquiry</a>
       <a href="contact.html">Contact</a>
       <a href="art_work.html"> Art Work</a>
     </nav>
 
-    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-open>
+    <div class="header-actions">
+      <button class="search-toggle" type="button" aria-label="Search the website" aria-expanded="false" aria-controls="search-panel" data-search-open>
+        <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-open>
       <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
+    </div>
   </div>
 </header>
+
+<!-- ============ SITE SEARCH PANEL (opened by the magnifier in the header; logic in js/search.js) ============ -->
+<div class="search-panel" id="search-panel" data-search-panel hidden>
+  <div class="wrap">
+    <form class="search-form" role="search" data-search-form novalidate>
+      <label class="sr-only" for="site-search">Search the KreatedByKeora website</label>
+      <input type="search" id="site-search" name="q" placeholder="Search services, prices, art work…" autocomplete="off" data-search-input>
+      <button type="button" class="search-close" aria-label="Close search" data-search-close>&times;</button>
+    </form>
+    <p class="search-status" role="status" aria-live="polite" data-search-status>Search services, prices, policies, art work and more.</p>
+    <ul class="search-results" data-search-results></ul>
+  </div>
+</div>
+
 
 <!-- ============ MOBILE DRAWER ============ -->
 <div class="drawer" data-drawer>
@@ -41,8 +64,8 @@
     <button class="drawer-close" aria-label="Close menu" data-menu-close>&times;</button>
     <nav aria-label="Mobile">
       <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
       <a href="services.html">Services</a>
-       <a href="about.html">About Us</a>
       <a href="enquiry.html">Book / Enquire</a>
       <a href="contact.html">Contact</a>
      <a href="art_work.html"> Art Work</a>
@@ -53,9 +76,6 @@
 
 <main>
   <div class="wrap">
-
-       <div class="thumb">
-        <img src="images/portfolio/pink-french-charms.jpeg" alt="Classic manicure with soft pink polish"></div>
 
       <span class="eyebrow">Meet the artist</span>
       <h1>Meet Keora</h1>
@@ -114,8 +134,8 @@
   <div class="wrap">
     <div class="brand"><img src="images/hero/logo.jpeg" alt=""> KreatedByKeora</div>
     <div class="social-row">
-      <a class="social-btn whatsapp" href="https://wa.me/0820951275" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="social-btn" href="tel:0820951275">Call</a>
+      <a class="social-btn whatsapp" href="https://wa.me/27820951275" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="social-btn" href="tel:+27820951275">Call</a>
     </div>
     <p>&copy; Nonkululeko Sibiya ST10502108 2026 KreatedByKeora. All rights reserved.</p>
   </div>
@@ -123,5 +143,6 @@
 
 
 <script src="js/main.js" defer></script>
+<script src="js/search.js" defer></script>
 </body>
 </html>
