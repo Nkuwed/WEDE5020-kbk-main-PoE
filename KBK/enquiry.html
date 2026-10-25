@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book / Enquiry — KreatedByKeora</title>
 <meta name="description" content="Book a nail appointment or send an enquiry to KreatedByKeora, Kibler Park, Johannesburg South.">
+<meta name="keywords" content="book nails, nail appointment Johannesburg South, nail booking form, nail enquiry, Gel-X booking, deposit policy">
+<meta name="author" content="Nonkululeko Sibiya">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,11 +35,30 @@
 
     </nav>
 
-    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-open>
+    <div class="header-actions">
+      <button class="search-toggle" type="button" aria-label="Search the website" aria-expanded="false" aria-controls="search-panel" data-search-open>
+        <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-open>
       <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
+    </div>
   </div>
 </header>
+
+<!-- ============ SITE SEARCH PANEL (opened by the magnifier in the header; logic in js/search.js) ============ -->
+<div class="search-panel" id="search-panel" data-search-panel hidden>
+  <div class="wrap">
+    <form class="search-form" role="search" data-search-form novalidate>
+      <label class="sr-only" for="site-search">Search the KreatedByKeora website</label>
+      <input type="search" id="site-search" name="q" placeholder="Search services, prices, art work…" autocomplete="off" data-search-input>
+      <button type="button" class="search-close" aria-label="Close search" data-search-close>&times;</button>
+    </form>
+    <p class="search-status" role="status" aria-live="polite" data-search-status>Search services, prices, policies, art work and more.</p>
+    <ul class="search-results" data-search-results></ul>
+  </div>
+</div>
+
 
 <div class="drawer" data-drawer>
   <div class="drawer-panel">
@@ -62,23 +85,24 @@
     </section>
 
     <section>
-      <form id="booking-form" novalidate>
+      <!-- Validated in js/main.js (client-side) and submitted with fetch() (AJAX) — no page reload. -->
+      <form id="booking-form" novalidate data-form="enquiry" action="#" method="post">
 
         <div class="field" data-field>
           <label for="full-name">Full Name</label>
-          <input type="text" id="full-name" name="fullName" placeholder="e.g. Lerato Dlamini" required>
+          <input type="text" id="full-name" name="fullName" placeholder="e.g. Lerato Dlamini" required minlength="2" maxlength="60" autocomplete="name" data-rule="name">
           <span class="error-msg">Please enter your full name.</span>
         </div>
 
         <div class="field" data-field>
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" placeholder="e.g. 082 123 4567" required>
+          <input type="tel" id="phone" name="phone" placeholder="e.g. 082 123 4567" required inputmode="tel" autocomplete="tel" data-rule="sa-phone">
           <span class="error-msg">Please enter a valid South African phone number.</span>
         </div>
 
         <div class="field" data-field>
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="e.g. lerato@email.com" required>
+          <input type="email" id="email" name="email" placeholder="e.g. lerato@email.com" required autocomplete="email" data-rule="email">
           <span class="error-msg">Please enter a valid email address.</span>
         </div>
 
@@ -98,42 +122,44 @@
 
         <div class="field" data-field>
           <label for="date">Preferred Date</label>
-          <input type="date" id="date" name="date" required>
+          <input type="date" id="date" name="date" required data-rule="booking-date">
           <span class="error-msg">Please choose a preferred date.</span>
         </div>
 
        <div class="field">
-          <label for="reference">Reference Image ></label>
+          <label for="reference">Reference Image (optional)</label>
           <input type="file" id="reference" name="reference" accept="image/*" class="file-input">
         </div>
 
         <div class="field" data-field>
           <label for="message">Message / Details</label>
-          <textarea id="message" name="message" placeholder="Tell Keora about the design, nail length or anything else she should know" required></textarea>
-          <span class="error-msg">Please add a short message so Keora knows what you'd like.</span>
+          <textarea id="message" name="message" placeholder="Tell Keora about the design, nail length or anything else she should know" required minlength="10" maxlength="600" data-rule="message"></textarea>
+          <span class="error-msg">Please add a short message (at least 10 characters) so Keora knows what you'd like.</span>
         </div>
 
-        <div class="policy-list">
-          <div class="policy-item">
-            <h4>Deposit</h4>
+        <!-- Accordion (native <details>): tap a heading to open / close a policy -->
+        <div class="accordion" id="policies" aria-label="Booking policies">
+          <details>
+            <summary>Deposit</summary>
             <p>A non-refundable deposit is required to confirm every booking and is deducted from your final price.</p>
-          </div>
-          <div class="policy-item">
-            <h4>Late arrivals</h4>
+          </details>
+          <details>
+            <summary>Late arrivals</summary>
             <p>Arrivals more than 15 minutes late may be asked to rebook or a late fee may apply.</p>
-          </div>
-          <div class="policy-item">
-            <h4>Cancellations</h4>
+          </details>
+          <details>
+            <summary>Cancellations</summary>
             <p>Cancellations made less than 24 hours before your appointment forfeit the deposit.</p>
-          </div>
+          </details>
         </div>
 
-       <div class="privacy-note">
+        <div class="privacy-note">
           <strong>Your privacy:</strong> the details you share here are used only to confirm and manage your appointment, in line with POPIA. They are never sold or shared with third parties.
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
-        <div class="form-success" id="form-success">Thank you! Your enquiry has been received — Keora will confirm your booking by WhatsApp or email shortly.</div>
+        <!-- Filled in by main.js after a valid submit: estimate + availability for the chosen service/date -->
+        <div class="form-success" id="form-success" role="status" aria-live="polite" tabindex="-1"></div>
       </form>
     </section>
 
@@ -146,8 +172,8 @@
     <div class="brand"><img src="images/hero/logo.jpeg" alt=""><br>KreatedByKeora</div>
     <p>Nail artistry studio based in Kibler Park, Johannesburg South. Bookings via website form or WhatsApp.</p>
     <div class="social-row">
-      <a class="social-btn whatsapp" href="https://wa.me/0820951275" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="social-btn" href="tel:+0820951275">Call</a>
+      <a class="social-btn whatsapp" href="https://wa.me/27820951275" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="social-btn" href="tel:+27820951275">Call</a>
     </div>
     <div class="footer-links">
       <a href="https://instagram.com/kreatedbykeora" target="_blank" rel="noopener">Instagram</a>
@@ -159,5 +185,6 @@
 </footer>
 
 <script src="js/main.js" defer></script>
+<script src="js/search.js" defer></script>
 </body>
 </html>
