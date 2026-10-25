@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services &amp; Pricing — KreatedByKeora</title>
 <meta name="description" content="Manicures, Gel-X extensions, custom nail art and pedicures with indicative pricing at KreatedByKeora, Kibler Park.">
+<meta name="keywords" content="nail services prices, Gel-X price, manicure price, pedicure price, gel overlay, custom nail art, nails Kibler Park">
+<meta name="author" content="Nonkululeko Sibiya">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index, follow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,11 +32,30 @@
       <a href="contact.html">Contact</a>
       <a href="art_work.html"> Art Work</a>
     </nav>
-    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-open>
+    <div class="header-actions">
+      <button class="search-toggle" type="button" aria-label="Search the website" aria-expanded="false" aria-controls="search-panel" data-search-open>
+        <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-open>
       <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
+    </div>
   </div>
 </header>
+
+<!-- ============ SITE SEARCH PANEL (opened by the magnifier in the header; logic in js/search.js) ============ -->
+<div class="search-panel" id="search-panel" data-search-panel hidden>
+  <div class="wrap">
+    <form class="search-form" role="search" data-search-form novalidate>
+      <label class="sr-only" for="site-search">Search the KreatedByKeora website</label>
+      <input type="search" id="site-search" name="q" placeholder="Search services, prices, art work…" autocomplete="off" data-search-input>
+      <button type="button" class="search-close" aria-label="Close search" data-search-close>&times;</button>
+    </form>
+    <p class="search-status" role="status" aria-live="polite" data-search-status>Search services, prices, policies, art work and more.</p>
+    <ul class="search-results" data-search-results></ul>
+  </div>
+</div>
+
 
   
 <div class="drawer" data-drawer>
@@ -61,7 +84,12 @@
     </section>
 
 
-<!-- Sort / filter, per wireframe -->
+<section aria-label="Service list">
+<!-- Search + filter, per wireframe: type to narrow the list, or pick a category chip -->
+    <div class="field service-search">
+      <label class="sr-only" for="service-search">Search services</label>
+      <input type="search" id="service-search" placeholder="Search services, e.g. gel, french, R250…" autocomplete="off" data-service-search>
+    </div>
     
       <div class="chip-row" data-filter-row>
         <button class="chip active" data-filter="all">All</button>
@@ -75,7 +103,7 @@
       <div class="grid-2" data-service-grid>
 
         <article class="service-card" data-category="manicure" id="manicures">
-          <div class="thumb"><img src="images/portfolio/classic manny.jpg" alt="Classic manicure with soft pink polish"></div>
+          <div class="thumb"><img src="images/portfolio/classic-white-manicure.jpg" alt="Classic manicure with soft pink polish"></div>
           <div class="service-body">
             <h3>Classic Manicure</h3>
             <span class="price">From R150</span>
@@ -103,7 +131,7 @@
         </article>
 
         <article class="service-card" data-category="gel-x" id="gel-overlay">
-          <div class="thumb"><img src="images/portfolio/gld.jpg" alt="Gel overlay on natural nails"></div>
+          <div class="thumb"><img src="images/portfolio/soft-pink-silver-line-nails.jpg" alt="Sheer pink gel overlay with fine silver line art" loading="lazy"></div>
           <div class="service-body">
             <h3>Gel Overlay</h3>
             <span class="price">From R250</span>
@@ -112,7 +140,7 @@
         </article>
 
         <article class="service-card" data-category="pedicure" id="pedicures">
-          <div class="thumb"><img src="images/portfolio/pink-french-charms.jpeg" alt="Pedicure treatment" ></div>
+          <div class="thumb"><img src="images/portfolio/french-pedicure-close-up.png" alt="French pedicure with crisp white tips" loading="lazy"></div>
           <div class="service-body">
             <h3>Pedicure</h3>
             <span class="price">From R200</span>
@@ -121,7 +149,7 @@
         </article>
 
         <article class="service-card" data-category="nail-art">
-          <div class="thumb"><img src="images/portfolio/pln1.jpg"></div>
+          <div class="thumb"><img src="images/portfolio/olive-gold-chrome-almond-nails.jpg" alt="Olive and gold chrome accent nails" loading="lazy"></div>
           <div class="service-body">
             <h3>Add-on Design</h3>
             <span class="price">From R50</span>
@@ -138,14 +166,16 @@
       <a href="enquiry.html" class="btn btn-primary btn-block">Book / Enquire About a Service</a>
     </section>
 
-  </div>
-   <div class="grid-2" data-service-grid>
+    <section aria-labelledby="posters-title">
+      <h2 id="posters-title">Price list &amp; policies</h2>
+      <p>The studio's current price list and booking policies, exactly as shared on social media.</p>
+      <div class="poster-grid">
+        <img src="images/portfolio/studio-price-list.jpg" width="1170" height="1560" alt="KreatedByKeora price list: Gel-X full cover tips, rubber base gel, toes, soak off and extras" loading="lazy">
+        <img src="images/portfolio/studio-policy-1.jpg" width="1170" height="1560" alt="KreatedByKeora policy poster: 50% deposit, non-refundable deposit, grace periods and late fee" loading="lazy">
+        <img src="images/portfolio/studio-policy-2.jpg" width="1170" height="1560" alt="KreatedByKeora policy poster: refills, nail repairs, no kids and parental consent" loading="lazy">
+      </div>
+    </section>
 
-    <img src="images/portfolio/kbkpol1.jpg" width="400" height="400">
-    <img src="images/portfolio/kbkpol2.jpg" width="400" height="400">
-    <img src="images/portfolio/kbkprice.jpg" width="400" height="400">
-  
-   </div>  
   </div>
 </main>
 
@@ -155,8 +185,8 @@
     <div class="brand"><img src="images/hero/logo.jpeg" alt=""> KreatedByKeora</div>
     <p>Nail artistry studio based in Kibler Park, Johannesburg South. Bookings via website form or WhatsApp.</p>
     <div class="social-row">
-      <a class="social-btn whatsapp" href="https://wa.me/27000000000" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="social-btn" href="tel:+27000000000">Call</a>
+      <a class="social-btn whatsapp" href="https://wa.me/27820951275" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="social-btn" href="tel:+27820951275">Call</a>
     </div>
     <div class="footer-links">
       <a href="https://instagram.com/kreatedbykeora" target="_blank" rel="noopener">Instagram</a>
@@ -169,6 +199,7 @@
 
 
 <script src="js/main.js" defer></script>
+<script src="js/search.js" defer></script>
 </body>
 </html>
 
