@@ -643,8 +643,310 @@ form { display: flex; flex-direction: column; gap: var(--space-3); }
 }
 
 
+/* ==========================================================================
+   16. ADDITIONS (Part 3) — site search, gallery lightbox, accordion
+   ========================================================================== */
 
+/* Visually hidden but still read by screen readers (labels for icon buttons) */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
+/* ---------- 16.1 Header actions (search + menu buttons) ---------- */
+.header-actions { display: flex; align-items: center; gap: 4px; }
 
+.search-toggle {
+  display: inline-flex;
+  padding: var(--space-1);
+  border-radius: var(--radius-s);
+  color: var(--blush-soft);
+}
+.search-toggle:hover,
+.search-toggle:focus-visible,
+.search-toggle[aria-expanded="true"] { background: var(--charcoal-raised); color: var(--blush); }
 
+/* ---------- 16.2 Search panel (drops down under the sticky header) ---------- */
+.search-panel {
+  position: fixed;
+  top: var(--header-h);
+  left: 0; right: 0;
+  z-index: 39;                       /* just under the header (40) */
+  background: var(--charcoal-raised);
+  border-bottom: 1px solid var(--charcoal-line);
+  box-shadow: var(--shadow-card);
+  max-height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  padding-block: var(--space-3);
+  animation: search-drop 0.18s ease-out;
+}
+.search-panel[hidden] { display: none; }
+
+@keyframes search-drop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.search-form { flex-direction: row; align-items: center; gap: var(--space-1); }
+
+.search-form input[type="search"] {
+  flex: 1;
+  min-width: 0;
+  background: var(--charcoal);
+  border: 1px solid var(--charcoal-line);
+  border-radius: 999px;
+  padding: 0.75rem 1.1rem;
+  color: var(--cream);
+  font-size: var(--step-0);
+}
+.search-form input[type="search"]::placeholder { color: #8a7d84; }
+.search-form input[type="search"]:hover { border-color: var(--rose-gold-dim); }
+.search-form input[type="search"]:focus {
+  outline: none;
+  border-color: var(--rose-gold);
+  box-shadow: 0 0 0 3px rgba(199, 154, 123, 0.25);
+}
+
+.search-close {
+  font-size: 1.8rem;
+  line-height: 1;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  color: var(--blush-soft);
+}
+.search-close:hover,
+.search-close:focus-visible { background: var(--charcoal-line); }
+
+.search-status {
+  margin-top: var(--space-2);
+  font-size: var(--step--1);
+  color: var(--rose-gold);
+}
+
+.search-results { display: grid; gap: 6px; margin-top: var(--space-2); }
+
+.search-result {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--charcoal-line);
+  border-radius: var(--radius-m);
+  background: var(--charcoal);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.search-result:hover,
+.search-result:focus-visible { border-color: var(--rose-gold); transform: translateX(3px); outline: none; }
+.search-result:active { transform: scale(0.99); }
+
+.search-type {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rose-gold);
+}
+.search-title { font-family: var(--font-display); font-size: var(--step-1); color: var(--blush-soft); }
+.search-text  { font-size: var(--step--1); color: #d8cdd3; }
+.search-result mark { background: rgba(241, 196, 214, 0.28); color: var(--blush); border-radius: 3px; padding: 0 2px; }
+
+/* ---------- 16.3 Gallery: photos are buttons that open the lightbox ---------- */
+.thumb-open {
+  display: block;
+  width: 100%; height: 100%;
+  padding: 0;
+  cursor: zoom-in;
+}
+.thumb-open:focus-visible { outline: 3px solid var(--blush); outline-offset: -3px; }
+.thumb-open::after {                 /* little "enlarge" hint on hover/focus */
+  content: "⤢";
+  position: absolute;
+  right: 8px; top: 8px;
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: rgba(24, 19, 26, 0.75);
+  color: var(--blush-soft);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.thumb-open:hover::after,
+.thumb-open:focus-visible::after { opacity: 1; }
+
+.gallery-heading { margin-bottom: var(--space-2); }
+
+/* ---------- 16.4 Lightbox overlay ---------- */
+body.lightbox-open { overflow: hidden; }   /* page behind does not scroll */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;                      /* above header, search and drawer */
+  display: flex;
+  flex-direction: column;
+  background: #0a070c;
+  animation: lb-fade 0.2s ease-out;
+}
+.lightbox[hidden] { display: none; }
+@keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-1) var(--space-3);
+  color: var(--blush-soft);
+  font-size: var(--step--1);
+}
+.lightbox-tools { display: flex; align-items: center; gap: var(--space-1); }
+
+.lightbox-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--charcoal-line);
+  border-radius: 999px;
+  color: var(--blush-soft);
+  font-size: var(--step--1);
+  font-weight: 600;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.lightbox-btn:hover,
+.lightbox-btn:focus-visible { background: var(--charcoal-line); border-color: var(--rose-gold); outline: none; }
+.lightbox-close { font-size: 1.6rem; line-height: 1; padding: 0.15rem 0.8rem; }
+
+/* The stage is the scrollable area: when the image is zoomed it overflows
+   and the visitor scrolls (or drags on touch) in both directions. */
+.lightbox-stage {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  place-items: center;
+  padding: var(--space-1) var(--space-3);
+  -webkit-overflow-scrolling: touch;
+}
+.lightbox-stage:focus-visible { outline: 2px solid var(--rose-gold); outline-offset: -2px; }
+
+.lightbox-img {
+  max-width: 100%;
+  /* viewport minus top bar, caption and padding, so the whole photo fits on screen */
+  max-height: calc(100vh - 9rem);
+  max-height: calc(100dvh - 9rem);
+  width: auto; height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-s);
+  cursor: zoom-in;
+}
+
+/* Zoomed: show the photo at its real pixel size so it can be scrolled around. */
+.lightbox.is-zoomed .lightbox-stage { display: block; }
+.lightbox.is-zoomed .lightbox-img {
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  cursor: zoom-out;
+}
+
+.lightbox-caption {
+  max-width: none;
+  padding: var(--space-1) var(--space-3) var(--space-3);
+  text-align: center;
+  color: #e7dde3;
+  font-size: var(--step--1);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(24, 19, 26, 0.8);
+  border: 1px solid var(--charcoal-line);
+  color: var(--blush-soft);
+  font-size: 2rem;
+  line-height: 1;
+  display: grid; place-items: center;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.lightbox-nav:hover,
+.lightbox-nav:focus-visible { background: var(--charcoal-line); border-color: var(--rose-gold); outline: none; }
+.lightbox-prev { left: var(--space-1); }
+.lightbox-next { right: var(--space-1); }
+
+/* ---------- 16.5 Accordion (enquiry page policies) ---------- */
+.accordion { display: grid; gap: var(--space-1); }
+.accordion details {
+  background: var(--charcoal-raised);
+  border: 1px solid var(--charcoal-line);
+  border-radius: var(--radius-m);
+  transition: border-color 0.15s ease;
+}
+.accordion details[open] { border-color: var(--rose-gold-dim); }
+.accordion summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-display);
+  color: var(--blush-soft);
+  font-size: var(--step-1);
+}
+.accordion summary::-webkit-details-marker { display: none; }
+.accordion summary::after {
+  content: "+";
+  color: var(--rose-gold);
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+}
+.accordion details[open] summary::after { transform: rotate(45deg); }
+.accordion summary:hover,
+.accordion summary:focus-visible { color: var(--blush); outline: none; }
+.accordion summary:focus-visible { box-shadow: 0 0 0 3px rgba(199, 154, 123, 0.35); border-radius: var(--radius-m); }
+.accordion details p { padding: 0 var(--space-3) var(--space-3); }
+
+/* ---------- 16.6 Small-screen / tablet / desktop tweaks for the additions ---------- */
+@media (max-width: 599px) {
+  .lightbox-nav { top: auto; bottom: 4.5rem; transform: none; }   /* thumb-reachable on phones */
+  .search-title { font-size: var(--step-0); }
+}
+@media (min-width: 860px) {
+  .search-panel .wrap { max-width: 720px; }
+  .lightbox-prev { left: var(--space-4); }
+  .lightbox-next { right: var(--space-4); }
+}
+
+/* ---------- 16.7 Form response, services search, price-list posters ---------- */
+.form-success strong { color: var(--success); }
+.form-success p { color: #d6efe2; margin-top: var(--space-1); }
+.form-success .btn { margin-top: var(--space-2); }
+.form-success:focus { outline: none; }
+.result-list { margin-top: var(--space-1); display: grid; gap: 6px; }
+.result-list li { color: #d6efe2; font-size: var(--step--1); }
+.result-list strong { color: var(--cream); }
+
+.service-search { margin-bottom: var(--space-2); }
+.service-search input[type="search"] {
+  background: var(--charcoal-raised);
+  border: 1px solid var(--charcoal-line);
+  border-radius: 999px;
+  padding: 0.75rem 1.1rem;
+  color: var(--cream);
+}
+.service-search input[type="search"]:hover { border-color: var(--rose-gold-dim); }
+.service-search input[type="search"]:focus {
+  outline: none;
+  border-color: var(--rose-gold);
+  box-shadow: 0 0 0 3px rgba(199, 154, 123, 0.25);
+}
+
+.poster-grid { display: grid; gap: var(--space-2); margin-top: var(--space-3); grid-template-columns: 1fr; }
+.poster-grid img { width: 100%; height: auto; border-radius: var(--radius-m); }
+@media (min-width: 600px) { .poster-grid { grid-template-columns: repeat(3, 1fr); } }
 
