@@ -1,7 +1,5 @@
 
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- Mobile nav drawer ---- */
@@ -49,8 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       cards.forEach((card) => {
         const match = filter === 'all' || card.getAttribute('data-category') === filter;
-        card.style.display = match ? '' : 'none';
-        if (match) visibleCount += 1;
+        card.toggleAttribute('data-hidden-by-chip', !match);
+        card.style.display = (match && !card.hasAttribute('data-hidden-by-text')) ? '' : 'none';
+        if (card.style.display !== 'none') visibleCount += 1;
       });
 
       if (emptyState) {
@@ -59,6 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  
+  
+  
+  44
+  
+  
+  
   /* ---- Basic client-side form validation ---- */
   const forms = document.querySelectorAll('form[novalidate]');
 
